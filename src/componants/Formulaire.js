@@ -9,7 +9,8 @@ class Formulaire extends Component {
         const { handleChangeTitre,handleChangeDiplome,titre,diplome} = this.props
 
         return(
-            <div className='border mt-2'>
+            <Fragment>
+                <h4>Formulaire :</h4>
                 <div className='row'>
                     <div className='col-lg-6'>
                         <label> Fonction Actuelle : </label>
@@ -26,7 +27,7 @@ class Formulaire extends Component {
                         <input className="form-control" type='text' onChange={handleChangeDiplome} value={diplome}/>
                     </div>
                 </div>  
-            </div>   
+            </Fragment>   
         );
     }
 }
