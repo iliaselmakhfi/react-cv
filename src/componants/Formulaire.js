@@ -1,32 +1,80 @@
 import React, { Component, Fragment } from 'react'
-import Info from './Info'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 class Formulaire extends Component {   
 
+    
+
     render(){
 
-        const { handleChangeTitre,handleChangeDiplome,titre,diplome} = this.props
+        const { handleChange,handleClickInit,handleClickSubmit,userTmp,error,niveauEtude} = this.props
+        const { nom,prenom,dateDeNaissance,biographie,competence} = userTmp
 
         return(
-            <div className='border mt-2'>
-                <div className='row'>
-                    <div className='col-lg-6'>
-                        <label> Fonction Actuelle : </label>
+            <Fragment>
+                <h1 className='text-center'>Formulaire</h1>
+                   <div className='row'>
+                        <div className='col-lg-6'>
+                            <label> Nom : </label>
+                        </div>
+                        <div className='col-lg-6'>
+                            <input className="form-control" type='text' name='nom' onChange={e => handleChange(e)} value={nom ? nom : ''}  maxLength='30'/>
+                        </div>
                     </div>
-                    <div className='col-lg-6'>
-                        <input className="form-control" type='text' onChange={handleChangeTitre} value={titre}/>
+                    <div className='row'>
+                        <div className='col-lg-6'>
+                            <label> Prenom : </label>
+                        </div>
+                        <div className='col-lg-6'>
+                            <input className="form-control" type='text' name='prenom' onChange={e => handleChange(e)} value={prenom ? prenom : ''} maxLength='30'/>
+                            <span className='Error'>{error.prenom}</span>
+                        </div>
                     </div>
-                </div>
-                <div className='row'>
-                    <div className='col-lg-6'>
-                        <label> Diplome : </label>
+                    <div className='row'>
+                        <div className='col-lg-6'>
+                            <label> Date de naissance : </label>
+                        </div>
+                        <div className='col-lg-6'>
+                            <input className="form-control" type='date' name='dateDeNaissance' onChange={e => handleChange(e)}  value={dateDeNaissance ? dateDeNaissance: ''}/>
+                        </div>
                     </div>
-                    <div className='col-lg-6'>
-                        <input className="form-control" type='text' onChange={handleChangeDiplome} value={diplome}/>
+                    <div className='row'>
+                        <div className='col-lg-6'>
+                            <label> Niveau d'Etude : </label>
+                        </div>
+                        <div className='col-lg-6'>
+                            <select className="form-select" name='niveauEtude' onChange={e => handleChange(e)} defaultValue='CHOISISEZ'>
+                                { Object.keys(niveauEtude).map(key => <option value={niveauEtude[key]}>{niveauEtude[key]}</option> ) }
+                            </select>
+                        </div>
                     </div>
-                </div>  
-            </div>   
+                    <div className='row'>
+                        <div className='col-lg-6'>
+                            <label> Biographie : </label>
+                        </div>
+                        <div className='col-lg-6'>
+                            <textarea className="form-control" name='biographie' onChange={e => handleChange(e)} value={biographie ? biographie: ''} maxLength='300'/>
+                            <span className='Error'>{error.biographie}</span>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-lg-6'>
+                            <label> Competence : </label>
+                        </div>
+                        <div className='col-lg-6'>
+                            <input className="form-control" placeholder="Add tags" type='text' name='competence' onChange={e => handleChange(e)} value={competence ? competence: ''}/>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <div className='col-lg-6'>
+                            <button className="btn btn-success" onClick={() => handleClickSubmit(userTmp)}>Valider</button>
+                        </div>
+                        <div className='col-lg-6'>
+                            <button className="btn btn-warning" onClick={handleClickInit}>Initialiser</button>
+                        </div>
+                    </div>
+                     
+            </Fragment>   
         );
     }
 }
