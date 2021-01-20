@@ -29,8 +29,8 @@ class App extends Component {
   
   handleChange = (event) =>{
     const {value,name} = event.target
-    let user = {...this.state.userTmp}
-    user[name] = value
+    const field = {[name] : value}
+    const user = {...this.state.userTmp,...field}
     this.setState({userTmp:user})
     this.handleControl(event)
   }
